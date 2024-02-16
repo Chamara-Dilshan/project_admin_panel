@@ -3,6 +3,7 @@ import UserForm from './UserForm';
 import UsersTable from './UsersTable';
 import { Box } from '@mui/material';
 import  Axios  from "axios";
+import './Users.css';
 
 
 
@@ -87,12 +88,13 @@ const Users = () => {
   }
           
   return (
-    <div>
+    <div className='userpage'>
+
         <Box
           sx={{
-            width:'calc(100% - 200px)',
+            width:'calc(100% - 50px)',
             margin: 'auto',
-            marginTop:'100px',
+            marginTop:'50px',
            
           }}
         >

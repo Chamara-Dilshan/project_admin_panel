@@ -11,7 +11,7 @@ const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState({});
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false); 
 
 
   useEffect (() => {

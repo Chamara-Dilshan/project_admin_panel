@@ -1,23 +1,20 @@
 import { Grid, Typography, Button, Input } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
-    const [id, setId] = useState('')
+const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
     const [name, setName] = useState('')
     const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
 
 
     useEffect(() => {
         if (!submitted){
-            setId('');
             setName('');
             
         }
     }, [submitted]);
 
     useEffect(() => {
-        if (data && data.id && data.id !==0 ){
-            setId(data.id);
+        if (data && data.name && data.name !==0 ){
             setName(data.name);
             setMode('edit');  // set the mode to edit when data is passed as prop
         }
@@ -25,7 +22,6 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
 
 // a function to reset the form fields and mode
     const resetForm = () => {
-        setId('');
         setName('');
         setMode('add');
     }
@@ -42,8 +38,9 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
         }}
     >
         <Grid item xs={12}>
-            <Typography component={'h1'} sx={{color:'black',fontSize:'30px'}}>Users</Typography> 
+            <Typography component={'h1'} sx={{color:'black',fontSize:'30px'}}>Teams</Typography> 
         </Grid>
+
 
         <Grid item xs={12} sm={6} sx={{display:'flex'}}>
             <Typography
@@ -56,27 +53,7 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
                     width:'100px',
                     display:'block'
                 }}
-            >ID</Typography>
-            <Input
-                type='number'
-                id='id'
-                name='id'
-                sx={{with:'400px'}}
-                value={id}
-                onChange={e => setId(e.target.value)}/>
-        </Grid>
-        <Grid item xs={12} sm={6} sx={{display:'flex'}}>
-            <Typography
-                component={'label'}
-                htmlFor='id'
-                sx={{
-                    color:'black',
-                    marginRight:'20px',
-                    fontSize:'16px',
-                    width:'100px',
-                    display:'block'
-                }}
-            >Name</Typography>
+            >Team Name</Typography>
             <Input
                 type='text'
                 id='name'
@@ -102,11 +79,11 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
 
             onClick={() => {
                 if (mode === 'edit') {                  // if (isEdit)
-                    updateUser({ id: id, name: name });
+                    updateTeam({ name: name });
                     resetForm(); // reset the form after updating the user
                     
                 } else {
-                    addUser({ id: id, name: name });
+                    addTeam({ name: name });
                 }
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
@@ -121,4 +98,4 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
     </Grid>
 )}
 
-export default UserForm
+export default TeamForm

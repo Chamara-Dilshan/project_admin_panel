@@ -17,7 +17,7 @@ function LoginSignUp() {
     }
   return (
     <>
-    <div className="container" >
+    <div className="l-s-container" >
         <div className={active ? "ls-container active" : "ls-container"} >
             <div className="form-container sign-up">
                 <form action='POST'>

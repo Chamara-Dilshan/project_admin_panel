@@ -14,15 +14,13 @@ function LoginSignUp() {
         setActive(false)
     }
 
-    const clickSignIn = () => {
-        window.location.href = "/home"
-    }
+    
   return (
     <>
     <div className="l-s-container" >
         <div className={active ? "ls-container active" : "ls-container"} >
-            <Signup clickSignIn={clickSignIn}/>
-            <Login clickSignIn={clickSignIn}/>
+            <Signup />
+            <Login />
             <div className="toggle-container">
                 <div className="toggle">
                     <div className="toggle-panel toggle-left">

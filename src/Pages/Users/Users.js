@@ -1,124 +1,124 @@
-import React, { useEffect, useState } from 'react';
-import UserForm from './UserForm';
-import UsersTable from './UsersTable';
-import { Box } from '@mui/material';
-import  Axios  from "axios";
-
-
-
+import React, { useEffect, useState } from "react";
+import UserForm from "./UserForm";
+import UsersTable from "./UsersTable";
+import { Box, Button } from "@mui/material";
+import Axios from "axios";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
-  const[submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [isEdit, setIsEdit] = useState(false);
-
-
-  useEffect (() => {
-      getUsers();
+  const [show,setShow] = useState(false);
+  
+  useEffect(() => {
+    getUsers();
   }, []);
 
   const getUsers = () => {
-      Axios.get('http://localhost:3001/api/users')
-        .then(response => {
-          console.log('API Response:', response.data);  
-          setUsers(response.data || []);
-        })
-        .catch(error => {
-            console.error("Axios Error : ", error);
-        });
-  }
-  
-  const addUser = (data) =>{
-      setSubmitted(true);
-      
-      if (data.id && data.name) {  // check if data has a valid id and name
+    Axios.get("http://localhost:3001/api/users")
+      .then((response) => {
+        console.log("API Response:", response.data);
+        setUsers(response.data || []);
+      })
+      .catch((error) => {
+        console.error("Axios Error : ", error);
+      });
+  };
+
+  const addUser = (data) => {
+    setSubmitted(true);
+
+    if (data.id && data.name) {
+      // check if data has a valid id and name
       const payload = {
         id: data.id,
         name: data.name,
-      }
-      
-      Axios.post('http://localhost:3001/api/createuser', payload)
+      };
+
+      Axios.post("http://localhost:3001/api/createuser", payload)
         .then(() => {
           getUsers();
           setSubmitted(false);
           isEdit(false);
-          
         })
-        .catch(error => {
-            console.error("Axios Error : ", error);
+        .catch((error) => {
+          console.error("Axios Error : ", error);
         });
-      
-        // show an error message or disable the submit button
-      }  else {
-        alert("Please enter a valid id and name");
-      }
 
-  }
-  
+      // show an error message or disable the submit button
+    } else {
+      alert("Please enter a valid id and name");
+    }
+  };
+
   const updateUser = (data) => {
-      setSubmitted(true);
+    setSubmitted(true);
 
-      const payload = {
-        id: data.id,
-        name: data.name,
-      }
+    const payload = {
+      id: data.id,
+      name: data.name,
+    };
 
-      Axios.post('http://localhost:3001/api/updateuser', payload)
-        .then(() => {
-          getUsers();
-          setSubmitted(false);
-          isEdit(false);
-        })
-        .catch(error => {
-            console.error("Axios Error : ", error);
-        });
+    Axios.post("http://localhost:3001/api/updateuser", payload)
+      .then(() => {
+        getUsers();
+        setSubmitted(false);
+        isEdit(false);
+      })
+      .catch((error) => {
+        console.error("Axios Error : ", error);
+      });
+  };
 
-  }
-
-  const deleteUser = (data) =>{
-    Axios.post('http://localhost:3001/api/deleteuser', data)
+  const deleteUser = (data) => {
+    Axios.post("http://localhost:3001/api/deleteuser", data)
       .then(() => {
         getUsers();
       })
-      .catch(error => {
-          console.error("Axios Error : ", error);
+      .catch((error) => {
+        console.error("Axios Error : ", error);
       });
+  };
 
+  const openForm = () =>{
+    setShow(true)
   }
-          
+
   return (
-    <div className='userpage'>
-
-        <Box
-          sx={{
-            width:'calc(100% - 50px)',
-            margin: 'auto',
-            marginTop:'50px',
-           
+    <div className="userpage">
+      <Box
+        sx={{
+          width: "calc(100% - 50px)",
+          margin: "auto",
+          marginTop: "50px",
+        }}
+      >
+        
+        <Button  style={{background:'blue',color:'white',fontWeight:'bold',display:'flex',width:'100px'}} onClick={openForm}>Add new</Button>
+        {
+          show && <UserForm
+          addUser={addUser}
+          updateUser={updateUser}
+          submitted={submitted}
+          data={selectedUser}
+          isEdit={isEdit}
+          setShow = {setShow}
+        />
+        }
+        <UsersTable
+          rows={users}
+          selectedUser={(data) => {
+            setSelectedUser(data);
+            setIsEdit(true);
           }}
-        >
-          <UserForm
-              addUser = {addUser}
-              updateUser = {updateUser}
-              submitted = {submitted}
-              data = {selectedUser}
-              isEdit={isEdit}
-          />
-
-          <UsersTable 
-              rows = {users}
-              selectedUser = {data => {
-                setSelectedUser(data);
-                setIsEdit(true);
-
-              }}
-              deleteUser = {data => window.confirm('Are you sure') && deleteUser(data) }
-          />
-         
-        </Box>
+          deleteUser={(data) =>
+            window.confirm("Are you sure") && deleteUser(data)
+          }
+        />
+      </Box>
     </div>
   );
-}
+};
 
 export default Users;

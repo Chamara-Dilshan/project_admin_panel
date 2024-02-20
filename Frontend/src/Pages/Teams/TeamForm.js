@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react'
 
 const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
     const [name, setName] = useState('')
+    const [description, setDescription] = useState('');
     const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
 
 
     useEffect(() => {
         if (!submitted){
             setName('');
+            setDescription('');
             
         }
     }, [submitted]);
@@ -16,6 +18,7 @@ const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
     useEffect(() => {
         if (data && data.name && data.name !==0 ){
             setName(data.name);
+            setDescription(data.description || '');
             setMode('edit');  // set the mode to edit when data is passed as prop
         }
     }, [data]);
@@ -23,6 +26,7 @@ const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
 // a function to reset the form fields and mode
     const resetForm = () => {
         setName('');
+        setDescription('');
         setMode('add');
     }
 
@@ -63,6 +67,38 @@ const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
                 onChange={e => setName(e.target.value)}/>
         </Grid>
 
+        {/* Description Input Field */}
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+            component={'label'}
+            htmlFor='description'
+            sx={{
+                color: 'black',
+                marginRight: '20px',
+                fontSize: '16px',
+                width: '100px',
+                display: 'block',
+            }}
+            >
+            Description
+            </Typography>
+            <Input
+            type='text'
+            id='description'
+            name='description'
+            sx={{ width: '400px' }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            maxLength={100} // Set the maximum character length
+            />
+            <Typography
+            variant='caption'
+            sx={{ color: description.length > 100 ? 'red' : 'black' }}
+            >
+            {description.length}/100
+            </Typography>
+        </Grid>
+
         <Button
             sx={{
                 margin:'auto',
@@ -79,11 +115,18 @@ const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
 
             onClick={() => {
                 if (mode === 'edit') {                  // if (isEdit)
-                    updateTeam({ name: name });
+                    updateTeam({ 
+                        name: name, 
+                        description: description 
+                    });
+
                     resetForm(); // reset the form after updating the user
                     
                 } else {
-                    addTeam({ name: name });
+                    addTeam({ 
+                        name: name, 
+                        description: description 
+                    });
                 }
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 

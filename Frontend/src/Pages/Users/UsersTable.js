@@ -8,8 +8,10 @@ const UsersTable = ({rows, selectedUser, deleteUser}) => {
         <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell>ID</TableCell>
+                    <TableCell>Emp No</TableCell>
                     <TableCell>Name</TableCell>
+                    <TableCell>Image</TableCell>
+                    <TableCell>Team</TableCell>
                     <TableCell>Action</TableCell>
                 </TableRow>
             </TableHead>
@@ -20,9 +22,21 @@ const UsersTable = ({rows, selectedUser, deleteUser}) => {
                             <TableCell component='th' scope="row">{row.id}</TableCell>
                             <TableCell component='th' scope="row">{row.name}</TableCell>
                             <TableCell>
+                            {row.image && (
+                                <img
+                                src={URL.createObjectURL(row.image)}
+                                alt={`User ${row.id} Image`}
+                                style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                                />
+                            )}
+                            </TableCell>
+                            <TableCell>{row.team}</TableCell>
+                                        
+                            
+                            <TableCell>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedUser({id: row.id, name: row.name })}
+                                    onClick={() => selectedUser({id: row.id, name: row.name, image: row.image, team: row.team })}
                                 >
                                     Edite
                                 </Button>

@@ -9,6 +9,7 @@ const TeamTable = ({rows, selectedTeam, deleteTeam}) => {
             <TableHead>
                 <TableRow>
                     <TableCell>Team Name</TableCell>
+                    <TableCell>Description</TableCell>
                     <TableCell>Action</TableCell>
                 </TableRow>
             </TableHead>
@@ -17,10 +18,11 @@ const TeamTable = ({rows, selectedTeam, deleteTeam}) => {
                     rows.length > 0 ? rows.map(row => (
                         <TableRow key={row.name} sx={{'&:last-child td, &:last-child th' : {border : 0}}}>
                             <TableCell component='th' scope="row">{row.name}</TableCell>
+                            <TableCell>{row.description}</TableCell>
                             <TableCell>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedTeam({name: row.name })}
+                                    onClick={() => selectedTeam({name: row.name, description: row.description })}
                                 >
                                     Edite
                                 </Button>

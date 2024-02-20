@@ -10,7 +10,7 @@ import {FaBars} from "react-icons/fa";
         const menuItem=[
             {
                 name: "Home",
-                path: "/"
+                path: "/home"
             },
     
             {

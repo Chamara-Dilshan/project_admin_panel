@@ -10,7 +10,7 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [show,setShow] = useState(false);
-  
+  const [formData, setFormData] = useState({});
   useEffect(() => {
     getUsers();
   }, []);
@@ -91,11 +91,12 @@ const Users = () => {
         sx={{
           width: "calc(100% - 50px)",
           margin: "auto",
-          marginTop: "50px",
+          marginTop: "80px",
+          
         }}
       >
         
-        <Button  style={{background:'blue',color:'white',fontWeight:'bold',display:'flex',width:'100px'}} onClick={openForm}>Add new</Button>
+        <Button  style={{background:'blue',color:'white',fontWeight:'bold',width:'100px',margin:'30px',position:'absolute',top:0,right:15}} onClick={openForm}>Add new</Button>
         {
           show && <UserForm
           addUser={addUser}

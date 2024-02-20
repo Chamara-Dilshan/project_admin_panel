@@ -1,49 +1,62 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { MDBTable, MDBTableHead, MDBTableBody } from "mdbreact"; // Import MDBReact components
+import axios from "axios";
 
-const ClientTable = ({rows, selectedClient, deleteClient}) => {
-    console.log('Received rows:', rows);
-    return (
-    <TableContainer component={Paper}>
-        <Table>
-            <TableHead>
-                <TableRow>
-                    <TableCell>Client Name</TableCell>
-                    <TableCell>Action</TableCell>
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {
-                    rows.length > 0 ? rows.map(row => (
-                        <TableRow key={row.name} sx={{'&:last-child td, &:last-child th' : {border : 0}}}>
-                            <TableCell component='th' scope="row">{row.name}</TableCell>
-                            <TableCell>
-                                <Button
-                                    sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedClient({name: row.name })}
-                                >
-                                    Edite
-                                </Button>
-                                <Button
-                                    sx={{margin:'0px 10px'}}
-                                    onClick={() => deleteClient({id: row.id})}
-                                >
-                                    Delete
-                                </Button>
-                            </TableCell>
+export default function ClientTable() {
+  const [allClient, setAllClient] = useState([]);
 
-                        </TableRow>
-                    )) : (
-                        <TableRow sx={{'&:last-child td, &:last-child th' : {border : 0}}}>
-                            <TableCell component='th' scope="row">No Data</TableCell>
-                        </TableRow>
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/users')
+      .then((response) => {
+        console.log('API Response:', response.data);  
+        setAllClient(response.data);
+        
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
+  }, []);
 
-                    )
-                }
-            </TableBody>
-        </Table>
-    </TableContainer>
-  )
+  const deleteClient = (id) => {
+    axios
+      .delete(`your-api-endpoint/${id}`)
+      .then((response) => {
+        console.log("User deleted successfully:", response.data);
+        setAllClient(allClient.filter(user => user.id !== id));
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
+  };
+
+  return (
+    <div>
+      <MDBTable>
+        <MDBTableHead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Country</th>
+            <th>Action</th>
+          </tr>
+        </MDBTableHead>
+        <MDBTableBody>
+           {allClient.map((client, index) => ( 
+            <tr >
+              <td>{client.name}</td>
+              <td>{client.country}</td>
+              <td>sample</td>
+              <td>
+                <button style={{padding:'5px',border:'none'}} onClick={() => deleteClient()}>
+                  delete
+                </button>
+              
+              </td>
+            </tr>
+           ))}
+        </MDBTableBody>
+      </MDBTable>
+    </div>
+  );
 }
-
-export default ClientTable

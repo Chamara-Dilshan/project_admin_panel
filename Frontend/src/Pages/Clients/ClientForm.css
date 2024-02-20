@@ -1,0 +1,52 @@
+.client-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .create-client-button {
+    padding: 10px 20px;
+    background: linear-gradient(to right, #4e9af1, #3072f9);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .client-form {
+    border: 1px solid #d45050;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .client-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .client-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #4e9af1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 10px;
+  }
+  
+  .submit-button:hover {
+    background-color: #3072f9;
+  }
+  

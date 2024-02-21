@@ -9,6 +9,12 @@ const ProjectTable = ({rows, selectedProject, deleteProject}) => {
             <TableHead>
                 <TableRow>
                     <TableCell>Project Name</TableCell>
+                    <TableCell>Description</TableCell>
+                    <TableCell>PlatformType</TableCell>
+                    <TableCell>Users</TableCell>
+                    <TableCell>Client</TableCell>
+                    <TableCell>StartDate</TableCell>
+                    <TableCell>EndDate</TableCell>
                     <TableCell>Action</TableCell>
                 </TableRow>
             </TableHead>
@@ -17,10 +23,16 @@ const ProjectTable = ({rows, selectedProject, deleteProject}) => {
                     rows.length > 0 ? rows.map(row => (
                         <TableRow key={row.name} sx={{'&:last-child td, &:last-child th' : {border : 0}}}>
                             <TableCell component='th' scope="row">{row.name}</TableCell>
+                            <TableCell component='th' scope="row">{row.description}</TableCell>
+                            <TableCell component='th' scope="row">{row.platformType}</TableCell>
+                            <TableCell component='th' scope="row">{row.users}</TableCell>
+                            <TableCell component='th' scope="row">{row.client}</TableCell>
+                            <TableCell component='th' scope="row">{row.startDate}</TableCell>
+                            <TableCell component='th' scope="row">{row.endDate}</TableCell>
                             <TableCell>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedProject({name: row.name })}
+                                    onClick={() => selectedProject({...row })}
                                 >
                                     Edite
                                 </Button>

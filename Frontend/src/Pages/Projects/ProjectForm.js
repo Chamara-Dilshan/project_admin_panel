@@ -198,6 +198,77 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
             </FormControl>
         </Grid>
 
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+                component={'label'}
+                htmlFor='client'
+                sx={{
+                color: 'black',
+                marginRight: '20px',
+                fontSize: '16px',
+                width: '100px',
+                display: 'block'
+                }}
+            >
+                Client
+            </Typography>
+            <Input
+                type='text'
+                id='client'
+                name='client'
+                sx={{ width: '400px' }}
+                value={client}
+                onChange={(e) => setClient(e.target.value)}
+            />
+        </Grid>
+
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+                component={'label'}
+                htmlFor='startDate'
+                sx={{
+                color: 'black',
+                marginRight: '20px',
+                fontSize: '16px',
+                width: '100px',
+                display: 'block'
+                }}
+            >
+                Start Date
+            </Typography>
+            <Input
+                type='date'
+                id='startDate'
+                name='startDate'
+                sx={{ width: '400px' }}
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+            />
+        </Grid>
+
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+                component={'label'}
+                htmlFor='endDate'
+                sx={{
+                color: 'black',
+                marginRight: '20px',
+                fontSize: '16px',
+                width: '100px',
+                display: 'block'
+                }}
+            >
+                End Date
+            </Typography>
+            <Input
+                type='date'
+                id='endDate'
+                name='endDate'
+                sx={{ width: '400px' }}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+            />
+        </Grid>
         
 
         <Button

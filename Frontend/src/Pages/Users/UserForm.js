@@ -125,10 +125,10 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
             Image
             </Typography>
             <Input
-            type='file'
-            id='image'
-            name='image'
-            onChange={(e) => setImage(e.target.files[0])} // Handle image selection
+                type='file'
+                id='image'
+                name='image'
+                onChange={(e) => setImage(e.target.files[0])} // Handle image selection
 
             />
         </Grid>
@@ -136,24 +136,24 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
         {/* Input field for team */}
         <Grid item xs={12} sx={{ display: 'flex' }}>
             <Typography
-            component={'label'}
-            htmlFor='team'
-            sx={{ color: 'black', marginRight: '20px', fontSize: '16px', width: '100px', display: 'block' }}
+                component={'label'}
+                htmlFor='team'
+                sx={{ color: 'black', marginRight: '20px', fontSize: '16px', width: '100px', display: 'block' }}
             >
             Team
             </Typography>
             <Select
-            id='team'
-            name='team'
-            value={team}
-            onChange={(e) => setTeam(e.target.value)}
-            sx={{ with: '400px' }}
-            >
-            <MenuItem value=''>Select Team</MenuItem>
-            <MenuItem value='IOS'>IOS</MenuItem>
-            <MenuItem value='Android'>Android</MenuItem>
-            <MenuItem value='Web'>Web</MenuItem>
-            <MenuItem value='API'>API</MenuItem>
+                id='team'
+                name='team'
+                value={team}
+                onChange={(e) => setTeam(e.target.value)}
+                sx={{ with: '400px' }}
+                >
+                <MenuItem value=''>Select Team</MenuItem>
+                <MenuItem value='IOS'>IOS</MenuItem>
+                <MenuItem value='Android'>Android</MenuItem>
+                <MenuItem value='Web'>Web</MenuItem>
+                <MenuItem value='API'>API</MenuItem>
             </Select>
         </Grid>
 

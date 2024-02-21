@@ -1,14 +1,26 @@
-import { Grid, Typography, Button, Input } from '@mui/material'
+import { Grid, Typography, Button, Input, Select, MenuItem, InputLabel, FormControl, Chip  } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
 const ProjectForm = ({addProject, updateProject,submitted, data}) => {
     const [name, setName] = useState('')
+    const [description, setDescription] = useState('');
     const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
+    const [platformType, setPlatformType] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [client, setClient] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
 
     useEffect(() => {
         if (!submitted){
             setName('');
+            setDescription('');
+            setPlatformType([]);
+            setUsers([]);
+            setClient('');
+            setStartDate('');
+            setEndDate('');
             
         }
     }, [submitted]);
@@ -16,6 +28,12 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
     useEffect(() => {
         if (data && data.name && data.name !==0 ){
             setName(data.name);
+            setDescription(data.description || '');
+            setPlatformType(data.platformType || []);
+            setUsers(data.users || []);
+            setClient(data.client || '');
+            setStartDate(data.startDate || '');
+            setEndDate(data.endDate || '');
             setMode('edit');  // set the mode to edit when data is passed as prop
         }
     }, [data]);
@@ -23,6 +41,12 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
 // a function to reset the form fields and mode
     const resetForm = () => {
         setName('');
+        setDescription('');
+        setPlatformType([]);
+        setUsers([]);
+        setClient('');
+        setStartDate('');
+        setEndDate('');
         setMode('add');
     }
 
@@ -53,7 +77,7 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
                     width:'100px',
                     display:'block'
                 }}
-            >Project Name</Typography>
+            >Project Title</Typography>
             <Input
                 type='text'
                 id='name'
@@ -62,6 +86,119 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
                 value={name}
                 onChange={e => setName(e.target.value)}/>
         </Grid>
+
+        {/* Description Input Field */}
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+                component={'label'}
+                htmlFor='description'
+                sx={{
+                    color: 'black',
+                    marginRight: '20px',
+                    fontSize: '16px',
+                    width: '100px',
+                    display: 'block',
+                }}
+                >
+                Description
+            </Typography>
+            <Input
+                type='text'
+                id='description'
+                name='description'
+                sx={{ width: '400px' }}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                maxLength={100} // Set the maximum character length
+             />
+            <Typography
+                variant='caption'
+                sx={{ color: description.length > 100 ? 'red' : 'black' }}
+                >
+                {description.length}/100
+            </Typography>
+        </Grid>
+
+
+
+
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+            component={'label'}
+            htmlFor='platformType'
+            sx={{
+                color: 'black',
+                marginRight: '20px',
+                fontSize: '16px',
+                width: '100px',
+                display: 'block'
+            }}
+            >
+            Platform Type
+            </Typography>
+            <FormControl sx={{ width: '400px' }}>
+                <InputLabel id='platformType-label'>Select Platform Type</InputLabel>
+                <Select
+                    labelId='platformType-label'
+                    id='platformType'
+                    multiple
+                    value={platformType}
+                    onChange={(e) => setPlatformType(e.target.value)}
+                    renderValue={(selected) => (
+                    <div>
+                        {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                        ))}
+                    </div>
+                    )}
+                >
+                    <MenuItem value='IOS'>IOS</MenuItem>
+                    <MenuItem value='Android'>Android</MenuItem>
+                    <MenuItem value='Web'>Web</MenuItem>
+                    <MenuItem value='API'>API</MenuItem>
+                </Select>
+            </FormControl>
+        </Grid>
+
+        <Grid item xs={12} sm={6} sx={{ display: 'flex' }}>
+            <Typography
+                component={'label'}
+                htmlFor='users'
+                sx={{
+                    color: 'black',
+                    marginRight: '20px',
+                    fontSize: '16px',
+                    width: '100px',
+                    display: 'block'
+                }}
+                >
+                Users
+            </Typography>
+            <FormControl sx={{ width: '400px' }}>
+            <InputLabel id='users-label'>Select Users</InputLabel>
+                <Select
+                    labelId='users-label'
+                    id='users'
+                    multiple
+                    value={users}
+                    onChange={(e) => setUsers(e.target.value)}
+                    renderValue={(selected) => (
+                    <div>
+                        {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                        ))}
+                    </div>
+                    )}
+                >
+                {/* Replace with actual user options */}
+                <MenuItem value='User1'>User1</MenuItem>
+                <MenuItem value='User2'>User2</MenuItem>
+                <MenuItem value='User3'>User3</MenuItem>
+            </Select>
+            </FormControl>
+        </Grid>
+
+        
 
         <Button
             sx={{
@@ -79,11 +216,27 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
 
             onClick={() => {
                 if (mode === 'edit') {                  // if (isEdit)
-                    updateProject({ name: name });
+                    updateProject({ 
+                        name: name,
+                        description,
+                        platformType, 
+                        users, 
+                        client, 
+                        startDate, 
+                        endDate 
+                    });
                     resetForm(); // reset the form after updating the user
                     
                 } else {
-                    addProject({ name: name });
+                    addProject({ 
+                        name: name,
+                        description,
+                        platformType, 
+                        users, 
+                        client, 
+                        startDate, 
+                        endDate  
+                    });
                 }
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
@@ -99,3 +252,5 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
 )}
 
 export default ProjectForm
+
+

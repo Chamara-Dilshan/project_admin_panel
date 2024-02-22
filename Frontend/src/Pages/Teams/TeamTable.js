@@ -24,7 +24,7 @@ const TeamTable = ({rows, selectedTeam, deleteTeam}) => {
                                     sx={{margin:'0px 10px'}}
                                     onClick={() => selectedTeam({name: row.name, description: row.description })}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}

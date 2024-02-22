@@ -38,7 +38,7 @@ const UsersTable = ({rows, selectedUser, deleteUser}) => {
                                     sx={{margin:'0px 10px'}}
                                     onClick={() => selectedUser({id: row.id, name: row.name, image: row.image, team: row.team })}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}

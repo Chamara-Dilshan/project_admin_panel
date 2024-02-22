@@ -34,7 +34,7 @@ const ClientTable = ({rows, selectedClient, deleteClient}) => {
                                     sx={{margin:'0px 10px'}}
                                     onClick={() => selectedClient({ ...row })}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}

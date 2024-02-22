@@ -34,7 +34,7 @@ const ProjectTable = ({rows, selectedProject, deleteProject}) => {
                                     sx={{margin:'0px 10px'}}
                                     onClick={() => selectedProject({...row })}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}

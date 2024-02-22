@@ -1,10 +1,10 @@
 import { Grid, Typography, Button, Input } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
+const TeamForm = ({addTeam, updateTeam,submitted, data,mode,setMode}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
-    const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
+     
 
 
     useEffect(() => {
@@ -19,7 +19,6 @@ const TeamForm = ({addTeam, updateTeam,submitted, data}) => {
         if (data && data.name && data.name !==0 ){
             setName(data.name);
             setDescription(data.description || '');
-            setMode('edit');  // set the mode to edit when data is passed as prop
         }
     }, [data]);
 

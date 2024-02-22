@@ -18,7 +18,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [mode, setMode] = useState('add')
   useEffect (() => {
       getProjects();
   }, []);
@@ -103,7 +103,9 @@ const Projects = () => {
         >
           <Button
           style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
-          onClick={() => setModalIsOpen(true)}>Add Project</Button>
+          onClick={() => {
+            setMode('add');
+            setModalIsOpen(true)}}>Add Project</Button>
           
           <Modal
             isOpen={modalIsOpen}
@@ -132,6 +134,8 @@ const Projects = () => {
               submitted = {submitted}
               data = {selectedProject}
               isEdit={isEdit}
+              mode={mode}
+              setMode={setMode}
           />
           </Modal>
           <ProjectTable 
@@ -140,6 +144,7 @@ const Projects = () => {
                 setSelectedProject(data);
                 setIsEdit(true);
               }}
+              setMode={setMode}
               setModalIsOpen={setModalIsOpen}
               deleteProject = {data => window.confirm('Are you sure') && deleteProject(data) }
           />

@@ -1,7 +1,7 @@
 import { Grid, Typography, Button, Input,  } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const ClientForm = ({addClient, updateClient,submitted, data}) => {
+const ClientForm = ({addClient, updateClient,submitted, data,mode,setMode}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
     const [profileImage, setProfileImage] = useState('');
@@ -9,7 +9,6 @@ const ClientForm = ({addClient, updateClient,submitted, data}) => {
     const [sampleLinks, setSampleLinks] = useState('');
     const [sampleImages, setSampleImages] = useState('');
     const [other, setOther] = useState('');
-    const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
 
 
     useEffect(() => {
@@ -34,7 +33,6 @@ const ClientForm = ({addClient, updateClient,submitted, data}) => {
             setSampleLinks(data.sampleLinks || '');
             setSampleImages(data.sampleImages || '');
             setOther(data.other || '');
-            setMode('edit');  // set the mode to edit when data is passed as prop
         }
     }, [data]);
 

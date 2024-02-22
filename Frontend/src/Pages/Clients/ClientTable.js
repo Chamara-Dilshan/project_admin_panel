@@ -1,7 +1,7 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React from 'react'
 
-const ClientTable = ({rows, selectedClient, deleteClient,setModalIsOpen}) => {
+const ClientTable = ({rows, selectedClient, deleteClient,setModalIsOpen,setMode}) => {
     console.log('Received rows:', rows);
     return (
     <TableContainer component={Paper}>
@@ -33,6 +33,7 @@ const ClientTable = ({rows, selectedClient, deleteClient,setModalIsOpen}) => {
                                 <Button
                                     sx={{margin:'0px 10px'}}
                                     onClick={() => {
+                                        setMode('edit')
                                         setModalIsOpen(true)
                                         selectedClient({ ...row })}}
                                 >

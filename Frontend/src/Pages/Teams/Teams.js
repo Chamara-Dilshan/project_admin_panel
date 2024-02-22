@@ -14,7 +14,7 @@ const Teams = () => {
   const [selectedTeam, setSelectedTeam] = useState({});
   const [isEdit, setIsEdit] = useState(false); 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [mode, setMode] = useState('add')
   useEffect (() => {
       getTeams();
   }, []);
@@ -99,7 +99,9 @@ const Teams = () => {
         >
           <Button
           style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
-          onClick={() => setModalIsOpen(true)}>Add Team</Button>
+          onClick={() => {
+            setMode('add')
+            setModalIsOpen(true)}}>Add Team</Button>
           
           <Modal
             isOpen={modalIsOpen}
@@ -128,7 +130,8 @@ const Teams = () => {
               submitted = {submitted}
               data = {selectedTeam}
               isEdit={isEdit}
-              
+              mode={mode}
+              setMode={setMode}
           />
           </Modal>
           
@@ -138,6 +141,8 @@ const Teams = () => {
                 setSelectedTeam(data);
                 setIsEdit(true);
               }}
+              mode={mode}
+              setMode={setMode}
               setModalIsOpen={setModalIsOpen}
               deleteTeam = {data => window.confirm('Are you sure') && deleteTeam(data) }
           />

@@ -1,10 +1,9 @@
 import { Grid, Typography, Button, Input, Select, MenuItem, InputLabel, FormControl, Chip  } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const ProjectForm = ({addProject, updateProject,submitted, data}) => {
+const ProjectForm = ({mode,setMode,addProject, updateProject,submitted, data}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
-    const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
     const [platformType, setPlatformType] = useState([]);
     const [users, setUsers] = useState([]);
     const [client, setClient] = useState('');
@@ -34,7 +33,6 @@ const ProjectForm = ({addProject, updateProject,submitted, data}) => {
             setClient(data.client || '');
             setStartDate(data.startDate || '');
             setEndDate(data.endDate || '');
-            setMode('edit');  // set the mode to edit when data is passed as prop
         }
     }, [data]);
 

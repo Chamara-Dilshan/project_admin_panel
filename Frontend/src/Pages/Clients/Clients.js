@@ -17,7 +17,7 @@ const Clients = () => {
   const [selectedClient, setSelectedClient] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [mode, setMode] = useState('add')
   useEffect (() => {
       getClients();
   }, []);
@@ -102,7 +102,9 @@ const Clients = () => {
         >
           <Button
           style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
-          onClick={() => setModalIsOpen(true)}>Add Client</Button>
+          onClick={() => {
+            setMode('add')
+            setModalIsOpen(true)}}>Add Client</Button>
           
           <Modal
             isOpen={modalIsOpen}
@@ -131,6 +133,8 @@ const Clients = () => {
               submitted = {submitted}
               data = {selectedClient}
               isEdit={isEdit}
+              mode={mode}
+              setMode={setMode}
           />
           </Modal>
           <ClientTable 
@@ -139,6 +143,7 @@ const Clients = () => {
                 setSelectedClient(data);
                 setIsEdit(true);
               }}
+              setMode={setMode}
               setModalIsOpen={setModalIsOpen}
               deleteClient = {data => window.confirm('Are you sure') && deleteClient(data) }
           />

@@ -1,12 +1,12 @@
 import { Grid, Typography, Button, Input, Select, MenuItem } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
+const UserForm = ({mode,setMode,addUser, updateUser,submitted, data, isEdit}) => {
     const [id, setId] = useState('')
     const [name, setName] = useState('')
     const [image, setImage] = useState(null);
     const [team, setTeam] = useState('');
-    const [mode, setMode] = useState('add') // a state variable to store the current mode of the form
+     // a state variable to store the current mode of the form
 
 
 //     const [showForm, setShowForm] = useState(false);
@@ -24,7 +24,7 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
 //         });
 //       };
 
-
+  
     useEffect(() => {
         if (!submitted){
             setId('');
@@ -41,18 +41,18 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
             setName(data.name);
             setImage(null);
             setTeam(data.team || '');
-            setMode('edit');  // set the mode to edit when data is passed as prop
+            // setMode('edit');  // set the mode to edit when data is passed as prop
         }
     }, [data]);
 
 // a function to reset the form fields and mode
+
     const resetForm = () => {
         setId('');
         setName('');
         setTeam('');
         setMode('add');
     }
-
 
   return (
     <Grid
@@ -178,10 +178,10 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
                         image: image, 
                         team: team
                     });
-
                     resetForm(); // reset the form after updating the user
                     
-                } else {
+                }else if (mode === 'add') {
+                    
                     addUser({ 
                         id: id, 
                         name: name, 
@@ -189,6 +189,7 @@ const UserForm = ({addUser, updateUser,submitted, data, isEdit}) => {
                         team: team
                     });
                 }
+                
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
         > 

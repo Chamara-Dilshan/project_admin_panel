@@ -1,7 +1,7 @@
 import { Grid, Typography, Button, Input, Select, MenuItem, InputLabel, FormControl, Chip  } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const ProjectForm = ({mode,setMode,addProject, updateProject,submitted, data}) => {
+const ProjectForm = ({mode,setMode,addProject, updateProject,submitted, data,setModalIsOpen}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
     const [platformType, setPlatformType] = useState([]);
@@ -307,6 +307,9 @@ const ProjectForm = ({mode,setMode,addProject, updateProject,submitted, data}) =
                         endDate  
                     });
                 }
+                setTimeout(() => {
+                    setModalIsOpen(false)
+                }, 500);
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
         > 

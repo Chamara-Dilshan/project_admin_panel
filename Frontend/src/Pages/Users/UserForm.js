@@ -1,7 +1,7 @@
 import { Grid, Typography, Button, Input, Select, MenuItem } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const UserForm = ({mode,setMode,addUser, updateUser,submitted, data, isEdit}) => {
+const UserForm = ({mode,setMode,addUser, updateUser,submitted, data, setModalIsOpen}) => {
     const [id, setId] = useState('')
     const [name, setName] = useState('')
     const [image, setImage] = useState(null);
@@ -189,7 +189,9 @@ const UserForm = ({mode,setMode,addUser, updateUser,submitted, data, isEdit}) =>
                         team: team
                     });
                 }
-                
+                setTimeout(() => {
+                    setModalIsOpen(false)
+                }, 500);
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
         > 

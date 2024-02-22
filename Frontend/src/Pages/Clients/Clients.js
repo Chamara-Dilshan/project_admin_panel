@@ -135,6 +135,7 @@ const Clients = () => {
               isEdit={isEdit}
               mode={mode}
               setMode={setMode}
+              setModalIsOpen={setModalIsOpen}
           />
           </Modal>
           <ClientTable 

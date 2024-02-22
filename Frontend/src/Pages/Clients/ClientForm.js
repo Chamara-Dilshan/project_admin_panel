@@ -1,7 +1,7 @@
 import { Grid, Typography, Button, Input,  } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const ClientForm = ({addClient, updateClient,submitted, data,mode,setMode}) => {
+const ClientForm = ({addClient, updateClient,submitted, data,mode,setMode,setModalIsOpen}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
     const [profileImage, setProfileImage] = useState('');
@@ -281,6 +281,9 @@ const ClientForm = ({addClient, updateClient,submitted, data,mode,setMode}) => {
                         other, 
                     });
                 }
+                setTimeout(() => {
+                    setModalIsOpen(false)
+                }, 500);
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
         > 

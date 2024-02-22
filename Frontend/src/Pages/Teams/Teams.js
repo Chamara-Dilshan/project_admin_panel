@@ -132,6 +132,7 @@ const Teams = () => {
               isEdit={isEdit}
               mode={mode}
               setMode={setMode}
+              setModalIsOpen={setModalIsOpen}
           />
           </Modal>
           

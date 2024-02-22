@@ -1,7 +1,7 @@
 import { Grid, Typography, Button, Input } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-const TeamForm = ({addTeam, updateTeam,submitted, data,mode,setMode}) => {
+const TeamForm = ({addTeam, updateTeam,submitted, data,mode,setMode,setModalIsOpen}) => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('');
      
@@ -127,6 +127,9 @@ const TeamForm = ({addTeam, updateTeam,submitted, data,mode,setMode}) => {
                         description: description 
                     });
                 }
+                setTimeout(() => {
+                    setModalIsOpen(false)
+                }, 500);
             }}   /* if equal key identifier = value identifier only need key or value {id, name}*/
 
         > 
@@ -135,6 +138,7 @@ const TeamForm = ({addTeam, updateTeam,submitted, data,mode,setMode}) => {
                 mode === 'edit' ? 'Update' :'Add' // render the button text based on the mode
                 
             } 
+            
         </Button>
 
     </Grid>

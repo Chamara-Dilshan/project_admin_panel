@@ -3,7 +3,12 @@ import ProjectForm from './ProjectForm';
 import ProjectTable from './ProjectTable';
 import { Box } from '@mui/material';
 import  Axios  from "axios";
+import Modal from 'react-modal'
+import '../../Components/Modal.css';
+import {Button} from '@mui/material';
 
+
+Modal.setAppElement('#root');
 
 
 
@@ -12,7 +17,7 @@ const Projects = () => {
   const [submitted, setSubmitted] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
   const [isEdit, setIsEdit] = useState(false);
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect (() => {
       getProjects();
@@ -92,10 +97,35 @@ const Projects = () => {
           sx={{
             width:'calc(100% - 50px)',
             margin: 'auto',
-            marginTop:'50px',
+            marginTop:'100px',
            
           }}
         >
+          <Button
+          style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
+          onClick={() => setModalIsOpen(true)}>Add Project</Button>
+          
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            style={{
+              overlay: {
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                width: '100%',
+              },
+              content: {
+                color: 'orange',
+                position: 'absolute',
+                top: '30px',
+                left: '25%',
+                right: '30%',
+                bottom: '40px',
+                borderRadius: '10px',
+              },
+              
+            }}
+
+          >
           <ProjectForm
               addProject = {addProject}
               updateProject = {updateProject}
@@ -103,7 +133,7 @@ const Projects = () => {
               data = {selectedProject}
               isEdit={isEdit}
           />
-
+          </Modal>
           <ProjectTable 
               rows = {projects}
               selectedProject = {data => {

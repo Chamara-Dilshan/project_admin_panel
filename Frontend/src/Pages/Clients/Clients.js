@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ClientForm from './ClientForm';
 import ClientTable from './ClientTable';
-import { Box } from '@mui/material';
+import { Box,Button } from '@mui/material';
 import  Axios  from "axios";
+import Modal from 'react-modal'
+import '../../Components/Modal.css';
 
+
+Modal.setAppElement('#root');
 
 
 
@@ -12,7 +16,7 @@ const Clients = () => {
   const [submitted, setSubmitted] = useState(false);
   const [selectedClient, setSelectedClient] = useState({});
   const [isEdit, setIsEdit] = useState(false);
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect (() => {
       getClients();
@@ -92,10 +96,35 @@ const Clients = () => {
           sx={{
             width:'calc(100% - 50px)',
             margin: 'auto',
-            marginTop:'50px',
+            marginTop:'100px',
            
           }}
         >
+          <Button
+          style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
+          onClick={() => setModalIsOpen(true)}>Add Client</Button>
+          
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            style={{
+              overlay: {
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                width: '100%',
+              },
+              content: {
+                color: 'orange',
+                position: 'absolute',
+                top: '30px',
+                left: '25%',
+                right: '30%',
+                bottom: '40px',
+                borderRadius: '10px',
+              },
+              
+            }}
+
+          >
           <ClientForm
               addClient = {addClient}
               updateClient = {updateClient}
@@ -103,7 +132,7 @@ const Clients = () => {
               data = {selectedClient}
               isEdit={isEdit}
           />
-
+          </Modal>
           <ClientTable 
               rows = {clients}
               selectedClient = {data => {

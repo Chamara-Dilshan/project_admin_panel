@@ -140,8 +140,9 @@ const Users = () => {
               selectedUser = {data => {
                 setSelectedUser(data);
                 setIsEdit(true);
-
+                setModalIsOpen={setModalIsOpen}
               }}
+              setModalIsOpen={setModalIsOpen}
               deleteUser = {data => window.confirm('Are you sure') && deleteUser(data) }
           />
          

@@ -128,6 +128,7 @@ const Teams = () => {
               submitted = {submitted}
               data = {selectedTeam}
               isEdit={isEdit}
+              
           />
           </Modal>
           
@@ -136,8 +137,8 @@ const Teams = () => {
               selectedTeam = {data => {
                 setSelectedTeam(data);
                 setIsEdit(true);
-
               }}
+              setModalIsOpen={setModalIsOpen}
               deleteTeam = {data => window.confirm('Are you sure') && deleteTeam(data) }
           />
          

@@ -6,3 +6,27 @@
     padding: 0;
     margin: 0;
 }
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+.container, .container-fluid, .container-xxl, .container-xl, .container-lg, .container-md, .container-sm {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+@media (min-width: 1400px){
+    .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+        max-width: 1522px;
+    }
+}
+
+@media (min-width: 1200px)
+{
+    .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1324px;}
+}
+
+@media (min-width: 992px)
+{.container-lg, .container-md, .container-sm, .container {
+    max-width: 1528px;}
+}
+

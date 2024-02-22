@@ -64,7 +64,7 @@ main{
 .top_section{
     display: flex;
     align-items:center;
-    padding:20px 15px;
+    padding:20px 0px;
 }
 .logo{
     font-size: 35px;

@@ -101,7 +101,7 @@ const Clients = () => {
           }}
         >
           <Button
-          style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
+          style={{background:'blue',color:'white',position:'absolute',right:'65px',top:'50px'}}
           onClick={() => {
             setMode('add')
             setModalIsOpen(true)}}>Add Client</Button>

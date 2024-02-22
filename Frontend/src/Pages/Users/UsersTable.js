@@ -1,7 +1,7 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React from 'react'
 
-const UsersTable = ({rows, selectedUser, deleteUser}) => {
+const UsersTable = ({rows, selectedUser, deleteUser,setModalIsOpen}) => {
     console.log('Received rows:', rows);
     return (
     <TableContainer component={Paper}>
@@ -36,9 +36,11 @@ const UsersTable = ({rows, selectedUser, deleteUser}) => {
                             <TableCell>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedUser({id: row.id, name: row.name, image: row.image, team: row.team })}
+                                    onClick={() => {
+                                        setModalIsOpen(true)
+                                        selectedUser({id: row.id, name: row.name, image: row.image, team: row.team })}}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}

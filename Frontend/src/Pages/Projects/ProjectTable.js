@@ -1,7 +1,7 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React from 'react'
 
-const ProjectTable = ({rows, selectedProject, deleteProject}) => {
+const ProjectTable = ({rows, selectedProject, deleteProject,setModalIsOpen}) => {
     console.log('Received rows:', rows);
     return (
     <TableContainer component={Paper}>
@@ -32,9 +32,11 @@ const ProjectTable = ({rows, selectedProject, deleteProject}) => {
                             <TableCell>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedProject({...row })}
+                                    onClick={() => {
+                                        setModalIsOpen(true)
+                                        selectedProject({...row })}}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}

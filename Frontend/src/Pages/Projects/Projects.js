@@ -139,8 +139,8 @@ const Projects = () => {
               selectedProject = {data => {
                 setSelectedProject(data);
                 setIsEdit(true);
-
               }}
+              setModalIsOpen={setModalIsOpen}
               deleteProject = {data => window.confirm('Are you sure') && deleteProject(data) }
           />
          

@@ -138,8 +138,8 @@ const Clients = () => {
               selectedClient = {data => {
                 setSelectedClient(data);
                 setIsEdit(true);
-
               }}
+              setModalIsOpen={setModalIsOpen}
               deleteClient = {data => window.confirm('Are you sure') && deleteClient(data) }
           />
          

@@ -1,7 +1,7 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import React from 'react'
 
-const TeamTable = ({rows, selectedTeam, deleteTeam}) => {
+const TeamTable = ({rows, selectedTeam, deleteTeam,setModalIsOpen}) => {
     console.log('Received rows:', rows);
     return (
     <TableContainer component={Paper}>
@@ -22,13 +22,15 @@ const TeamTable = ({rows, selectedTeam, deleteTeam}) => {
                             <TableCell>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => selectedTeam({name: row.name, description: row.description })}
+                                    onClick={() => {
+                                        setModalIsOpen(true)
+                                        selectedTeam({name: row.name, description: row.description })}}
                                 >
-                                    Edite
+                                    Edit
                                 </Button>
                                 <Button
                                     sx={{margin:'0px 10px'}}
-                                    onClick={() => deleteTeam({id: row.id})}
+                                    onClick={() => {deleteTeam({id: row.id})}}
                                 >
                                     Delete
                                 </Button>

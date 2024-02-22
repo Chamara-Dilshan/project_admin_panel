@@ -17,7 +17,7 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState({});
   const [isEdit, setIsEdit] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [mode, setMode] = useState('add')
   useEffect (() => {
       getUsers();
   }, []);
@@ -104,7 +104,12 @@ const Users = () => {
         >
             <Button
           style={{background:'blue',color:'white',position:'absolute',right:'45px',top:'50px'}}
-          onClick={() => setModalIsOpen(true)}>Add User</Button>
+          onClick={() => {
+            setModalIsOpen(true)
+            setMode('add')
+            console.log("mode",mode);
+          }}
+            >Add User</Button>
           
           <Modal
             isOpen={modalIsOpen}
@@ -133,6 +138,8 @@ const Users = () => {
               submitted = {submitted}
               data = {selectedUser}
               isEdit={isEdit}
+              mode={mode}
+              setMode={setMode}
           />
           </Modal>
           <UsersTable 
@@ -140,8 +147,9 @@ const Users = () => {
               selectedUser = {data => {
                 setSelectedUser(data);
                 setIsEdit(true);
-                setModalIsOpen={setModalIsOpen}
               }}
+              mode={mode}
+              setMode={setMode}
               setModalIsOpen={setModalIsOpen}
               deleteUser = {data => window.confirm('Are you sure') && deleteUser(data) }
           />
